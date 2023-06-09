@@ -1,9 +1,7 @@
-console.log("Hello world")
+const http = require("http");
 
-const multiply = (a,b)=> a*b;
+const server = http.createServer((re, res)=>{
+    console.log("pethanan")
+});
 
-console.log(multiply(10, 10))
-
-const student = {name: "pethanan", skill:"mern"}
-
-console.log(student)
+server.listen(3000);
