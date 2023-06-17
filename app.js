@@ -1,25 +1,19 @@
 const express = require("express");
+
 const bodyParser = require("body-parser");
 
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/add-product", (req, res, next) => {
-  console.log("Middleware");
-  console.log("add product page");
-  res.send(
-    '<form action="/product" method="POST"> <input type="text" name="title"><input type="number" name="size"> <button type="submit">Submit</button></form>'
-  );
-});
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
 
-app.post("/product", (req, res, next) => {
-  console.log(req.body);
-  res.redirect("/");
-});
-
-app.use("/", (req, res, next) => {
-  console.log("Middleware");
-  res.send("<h1>home</h1>");
+app.use((req, res, next) => {
+  res.status(404).send("<h1>Page not fond<h1>");
 });
 
 app.listen(3000);
