@@ -23,11 +23,11 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll((products) => {
+  Product.fetchAll().then(([rows, fieldData]) => {
     res.render("shop/index", {
-      prods: products,
-      pageTitle: "Shop",
+      prods: rows,
       path: "/",
+      pageTitle: "Shop",
     });
   });
 };
