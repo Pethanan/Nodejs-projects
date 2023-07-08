@@ -52,7 +52,7 @@ const cart = require("./cart");
 const db = require("../util/database");
 
 module.exports = class Product {
-  constructor(title, imageUrl, description, price) {
+  constructor(title, price, description, imageUrl) {
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
@@ -63,6 +63,20 @@ module.exports = class Product {
     return db.execute("SELECT * FROM products");
   }
 
+  save() {
+    return db.execute(
+      "INSERT INTO products (title, price, description, imageUrl) VALUES (?,?,?,?)",
+      [this.title, this.price, this.description, this.imageUrl]
+    );
+  }
+
+  static findById(id) {
+    return db.execute("SELECT * FROM products WHERE products.id=?", [id]);
+  }
+
+  static deleteById(id) {
+    return db.execute("DELETE FROM products WHERE products.id=?", [id]);
+  }
   // static fetchById(id) {
   //   db.execute("SELECT * FROM products WHERE id=");
   // }
