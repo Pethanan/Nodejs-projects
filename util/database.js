@@ -12,7 +12,7 @@
 
 //using sequelize
 
-const Sequelize = require("sequelize");
+const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize("peth_node", "root", "PETHmysql1@", {
   dialect: "mysql",
